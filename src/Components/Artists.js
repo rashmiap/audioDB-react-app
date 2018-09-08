@@ -47,13 +47,13 @@ class Artists extends Component {
        const MyLink = (props) => <Link to={{ pathname: `/albums/${item.strArtist}`, state: { artistdata: item} }}  {...props}  />
        return (
         <div key={item.idArtist} className="Artists-results">
-          <div style={Object.assign({ backgroundImage:`url(${item.strArtistThumb})`})} className="Artists-results__header">
+          <div style={{ backgroundImage:`url(${item.strArtistThumb})`}} className="Artists-results__header">
             &nbsp;
           </div>
           <div className="Artists-results__info">
             <h3 className="name">{item.strArtist}</h3>
-            <Button size="small" color="secondary" component={MyLink}>
-              See More
+            <Button size="small" color="secondary"  variant="contained" component={MyLink}>
+              View albums
             </Button>
           </div>
         </div>
@@ -63,7 +63,7 @@ class Artists extends Component {
     return renderArtistBlock;
   }
   render() {
-    const { userSearched, isLoading, error } = this.state;
+    const { userSearched, isLoading, error, artistsList } = this.state;
     if(error){
       return <div className="Artists">
               <p>{error.message}</p>
@@ -78,6 +78,7 @@ class Artists extends Component {
 
     return (
       <section className="Artists">
+        <h4 className="Artists-title">Search by artist</h4>
         <form noValidate autoComplete="off" className="Artists-form">
           <TextField
             id="artist"
@@ -91,7 +92,10 @@ class Artists extends Component {
             Search
           </Button>
         </form>
-        {this.__renderArtists()}
+        <div>
+          <h2>{ artistsList ? artistsList.length > 0 ? `Search results -` : '' : ''}</h2>
+          {this.__renderArtists()}
+        </div>
       </section>
     );
   }
