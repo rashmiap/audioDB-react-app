@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import TrackRecord from './TrackRecord';
 
 class Albums extends Component {
   constructor(props){
@@ -29,8 +30,20 @@ class Albums extends Component {
     })
     .catch(error => this.setState({ error, isLoading: false }));
   }
+  __renderAlbums(){
+    const { albumList } = this.state;
+    let renderAlbumBlock = [];
+    renderAlbumBlock = albumList !== null ?
+     albumList.map(item => {
+       return (
+         <TrackRecord key={item.idAlbum} albumName={item.strAlbum} albumId={item.idAlbum} releaseYear={item.intYearReleased}/>
+       );
+     })
+     : <p>oops! No artist found</p>;
+    return renderAlbumBlock;
+  }
   render() {
-    const { isLoading, error, artistdata } = this.state;
+    const { isLoading, error, artistdata, albumList } = this.state;
     if(error){
       return <div className="Albums">
               <p>{error.message}</p>
@@ -48,7 +61,16 @@ class Albums extends Component {
           <div style={{backgroundImage: `url(${artistdata.strArtistThumb})`}} className="Albums-artist__thumbnail">
             &nbsp;
           </div>
-          <h3>{artistdata.strArtist}</h3>
+          <div className="Albums-artist__info">
+            <h3>{artistdata.strArtist}</h3>
+            <p>Style: {artistdata.strStyle}</p>
+            <p>Genre: {artistdata.strGenre}</p>
+            <p>Country: {artistdata.strCountry}</p>
+          </div>
+        </div>
+        <div className="Albums-listing">
+          <h2>{ albumList ? albumList.length > 0 ? `Albums` : '' : ''}</h2>
+          {this.__renderAlbums()}
         </div>
       </section>
     );
