@@ -4,10 +4,14 @@ body{
 }
 .Artists{
   padding: 2%;
-  max-width: 35%;
+  max-width: 500px;
   margin: 3% auto;
   background-color: #fff;
   text-align: center;
+}
+.Artists-title{
+  margin: 0;
+  text-align: left;
 }
 .Artists-form{
   display: flex;
@@ -32,7 +36,7 @@ body{
 }
 .Albums{
   padding: 2%;
-  max-width: 65%;
+  max-width: 500px;
   margin: 3% auto;
   background-color: #fff;
   text-align: center;
@@ -49,7 +53,17 @@ body{
   background-size: cover;
   background-position: top;
 }
-.Albums-artist h3{
+.Albums-artist .Albums-artist__info{
   align-self: center;
-  margin: 0 auto;
+  margin: 4% 4% 0 auto;
+  text-align: right;
+}
+/* media query for tablet and mobile screens */
+@media only screen and (max-width: 600px) {
+  .Artists {
+    max-width: 90%;
+  }
+  .Albums{
+    max-width: 90%;
+  }
 }
