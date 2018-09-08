@@ -1,6 +1,6 @@
 body{
   min-height: 100vh;
-  background-color: #fafafa;
+  background-color: #feeff4;
 }
 .Artists{
   padding: 2%;
@@ -26,11 +26,14 @@ body{
 }
 .Artists-results__info{
   padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 .Artists-results__header{
   height: 230px;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   background-position: top;
   background-color: black;
 }
@@ -49,6 +52,7 @@ body{
 .Albums-artist__thumbnail{
   background-image: url(http://www.theaudiodb.com/images/media/artist/thumb/man-5350ed716bd42.jpg);
   width: 45%;
+  background-color: black;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top;
@@ -57,6 +61,51 @@ body{
   align-self: center;
   margin: 4% 4% 0 auto;
   text-align: right;
+}
+.Albums-results{
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
+  align-items: center;
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: space-between;
+  border: 12px solid #fff;
+  height: 130px;
+}
+.Albums-results__info{
+  text-align: right;
+}
+.Albums-results__header {
+    background-color: crimson;
+    height: inherit;
+    min-width: 50%;
+    display: flex;
+    align-items: CENTER;
+    justify-content: center;
+}
+.Albums-results__dialog >div:nth-of-type(2){
+  width: 400px;
+  padding: 12px 12px 23px;
+  box-sizing: border-box;
+}
+.Track-duration{
+  display: flex;
+  flex-direction: COLUMN;
+}
+.Track-error{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5%;
+}
+.Track-header{
+  padding: 16px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid gray;
+}
+.Track-header h3{
+  width: 100%;
 }
 /* media query for tablet and mobile screens */
 @media only screen and (max-width: 600px) {
