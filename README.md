@@ -1,6 +1,8 @@
 
 [**audioDB-react-app**](https://github.com/rashmiap/audioDB-react-app)
 -
+This is small and simple artist search app developed in ReactJS using the [audiodb APIs](https://www.theaudiodb.com/api_guide.php)
+
 The app has three screen:
   1) The first screen is a search page where you can search for an artist by name. There
   could be multiple artists that match the name, so pagination is added
