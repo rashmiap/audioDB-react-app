@@ -52,7 +52,8 @@ class Albums extends Component {
     renderAlbumBlock = currentPageAlbum !== null ?
      currentPageAlbum.map(item => {
        return (
-         <TrackRecord key={item.idAlbum} albumName={item.strAlbum} albumId={item.idAlbum} releaseYear={item.intYearReleased}/>
+         <TrackRecord key={item.idAlbum} albumName={item.strAlbum} albumId={item.idAlbum} albumCover={item.strAlbumThumb}
+         releaseYear={item.intYearReleased}/>
        );
      })
      : <p>oops! No artist found</p>;
