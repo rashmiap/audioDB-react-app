@@ -93,7 +93,7 @@ body{
 }
 .Albums-results__dialog >div:nth-of-type(2){
   width: 400px;
-  padding: 12px 12px 23px;
+  padding: 12px;
   box-sizing: border-box;
 }
 /* track component styling */

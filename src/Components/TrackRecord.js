@@ -5,6 +5,7 @@ import Dialog from '@material-ui/core/Dialog';
 import tone from '../Assets/tone.svg';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import DialogContent from '@material-ui/core/DialogContent';
+import DialogActions from '@material-ui/core/DialogActions';
 
 class TrackRecord extends Component {
   constructor(props){
@@ -101,6 +102,11 @@ class TrackRecord extends Component {
             <DialogContent>
               {this.__renderTracks()}
             </DialogContent>
+            <DialogActions>
+              <Button onClick={this.__handleDialogClose} color="secondary">
+                Close
+              </Button>
+            </DialogActions>
         </Dialog>
       </div>
     )
