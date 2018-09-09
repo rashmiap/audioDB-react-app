@@ -12,12 +12,25 @@ class Artists extends Component {
       userSearched: '',
       isLoading: false,
       error: null,
+      currentPage: 1,
+      artistsPerPage: 2,
     };
+  }
+  componentDidMount(){
+    window.scrollTo(0,0);
+  }
+  componentDidUpdate() {
+    window.scrollTo(0,0);
   }
   __handleUserChange = event => {
     this.setState({
       userSearched: event.target.value,
     })
+  }
+  __handleActivePage(event) {
+    this.setState({
+      currentPage: Number(event.target.id)
+    });
   }
   __fetchArtists(){
     const { userSearched } = this.state;
@@ -40,10 +53,13 @@ class Artists extends Component {
     .catch(error => this.setState({ error, isLoading: false, userSearched: ''}));
   }
   __renderArtists(){
-    const { artistsList } = this.state;
+    const { artistsList, artistsPerPage, currentPage } = this.state;
+    const indexOfLastArtist = currentPage * artistsPerPage;
+    const indexOfFirstArtist = indexOfLastArtist - artistsPerPage;
+    const currentPageArtist = artistsList ? artistsList.slice(indexOfFirstArtist, indexOfLastArtist) : null;
     let renderArtistBlock = [];
-    renderArtistBlock = artistsList !== null ?
-     artistsList.map(item => {
+    renderArtistBlock = currentPageArtist !== null ?
+     currentPageArtist.map(item => {
        const MyLink = (props) => <Link to={{ pathname: `/albums/${item.strArtist}`, state: { artistdata: item} }}  {...props}  />
        return (
         <div key={item.idArtist} className="Artists-results">
@@ -63,7 +79,7 @@ class Artists extends Component {
     return renderArtistBlock;
   }
   render() {
-    const { userSearched, isLoading, error, artistsList } = this.state;
+    const { userSearched, isLoading, error, artistsList, artistsPerPage, currentPage } = this.state;
     if(error){
       return <div className="Artists">
               <p>{error.message}</p>
@@ -75,7 +91,18 @@ class Artists extends Component {
                 <CircularProgress  color="secondary"/>
               </div>;
     }
-
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(artistsList ? artistsList.length / artistsPerPage : 1); i++) {
+      pageNumbers.push(i);
+    }
+    const renderPageNumbers = pageNumbers.map(number => {
+      return (
+        <li key={number} id={number}
+          onClick={this.__handleActivePage.bind(this)} className={ currentPage == number ? 'current' : ''}>
+          {number}
+        </li>
+      );
+    });
     return (
       <section className="Artists">
         <h4 className="Artists-title">Search by artist</h4>
@@ -96,6 +123,9 @@ class Artists extends Component {
           <h2>{ artistsList ? artistsList.length > 0 ? `Search results -` : '' : ''}</h2>
           {this.__renderArtists()}
         </div>
+        <ul className="Albums-pages">
+          {artistsList ? artistsList.length > 0 ? renderPageNumbers : '' : ''}
+        </ul>
       </section>
     );
   }

@@ -43,6 +43,11 @@ class TrackRecord extends Component {
       openDialog: false,
     })
   }
+  __convertToMinsAndSecs = millis => {
+    let minutes = Math.floor(millis / 60000);
+    let seconds = ((millis % 60000) / 1000).toFixed(0);
+    return (seconds == 60 ? (minutes+1) + ":00" : minutes + ":" + (seconds < 10 ? "0" : "") + seconds);
+  }
   __renderTracks(){
     const { trackList, error, isLoading } = this.state;
     let renderTrackBlock = [];
@@ -61,7 +66,7 @@ class TrackRecord extends Component {
      trackList.map(item => {
        return (
         <div key={item.idTrack} className="Track">
-          <p className="Track-duration">{item.strTrack}: <span>{item.intDuration} microsec</span></p>
+          <p className="Track-duration">{item.strTrack}: {item.intDuration == 0 ? '' : <span><strong>Duration</strong> : {this.__convertToMinsAndSecs(item.intDuration)}</span>}</p>
         </div>
        );
      })

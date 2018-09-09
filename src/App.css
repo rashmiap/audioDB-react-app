@@ -1,11 +1,13 @@
+/* body styling */
 body{
   min-height: 100vh;
   background-color: #feeff4;
 }
+/* artists component styling */
 .Artists{
   padding: 2%;
   max-width: 500px;
-  margin: 3% auto;
+  margin: 8% auto;
   background-color: #fff;
   text-align: center;
 }
@@ -37,10 +39,11 @@ body{
   background-position: top;
   background-color: black;
 }
+/* albums component styling */
 .Albums{
   padding: 2%;
   max-width: 500px;
-  margin: 3% auto;
+  margin: 8% auto;
   background-color: #fff;
   text-align: center;
 }
@@ -87,6 +90,7 @@ body{
   padding: 12px 12px 23px;
   box-sizing: border-box;
 }
+/* track component styling */
 .Track-duration{
   display: flex;
   flex-direction: COLUMN;
@@ -106,6 +110,26 @@ body{
 }
 .Track-header h3{
   width: 100%;
+}
+.Albums-pages{
+  display: flex;
+  list-style-type: none;
+  justify-content: flex-end;
+}
+.Albums-pages li{
+  border: 1px solid gray;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.Albums-pages li.current{
+  background-color: crimson;
+  color: white;
 }
 /* media query for tablet and mobile screens */
 @media only screen and (max-width: 600px) {
