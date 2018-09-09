@@ -56,7 +56,7 @@ class Albums extends Component {
     const { albumList, albumsPerPage, currentPage } = this.state;
     const indexOfLastAlbum = currentPage * albumsPerPage;
     const indexOfFirstAlbum = indexOfLastAlbum - albumsPerPage;
-    const currentPageAlbum = albumList.slice(indexOfFirstAlbum, indexOfLastAlbum);
+    const currentPageAlbum = albumList ? albumList.slice(indexOfFirstAlbum, indexOfLastAlbum) : null;
     let renderAlbumBlock = [];
 
     renderAlbumBlock = currentPageAlbum !== null ?
@@ -66,7 +66,7 @@ class Albums extends Component {
          releaseYear={item.intYearReleased}/>
        );
      })
-     : <p>oops! No artist found</p>;
+     : <p>oops! Nothing to show here</p>;
     return renderAlbumBlock;
   }
   render() {
@@ -83,7 +83,7 @@ class Albums extends Component {
               </div>;
     }
     const pageNumbers = [];
-    for (let i = 1; i <= Math.ceil(albumList.length / albumsPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(albumList ? albumList.length / albumsPerPage: 1); i++) {
       pageNumbers.push(i);
     }
     const renderPageNumbers = pageNumbers.map(number => {

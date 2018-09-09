@@ -67,7 +67,7 @@ class TrackRecord extends Component {
      trackList.map(item => {
        return (
         <div key={item.idTrack} className="Track">
-          <p className="Track-duration">{item.strTrack}: {item.intDuration == 0 ? '' : <span><strong>Duration</strong> : {this.__convertToMinsAndSecs(item.intDuration)}</span>}</p>
+          <p className="Track-duration"><strong>{item.strTrack}</strong> {item.intDuration == 0 ? '' : <span>Duration : {this.__convertToMinsAndSecs(item.intDuration)}</span>}</p>
         </div>
        );
      })
