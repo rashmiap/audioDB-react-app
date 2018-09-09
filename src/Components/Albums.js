@@ -10,9 +10,12 @@ class Albums extends Component {
       error: false,
       albumList: [],
       artistdata: this.props.location.state.artistdata,
+      currentPage: 1,
+      albumsPerPage: 4,
     }
   }
   componentDidMount(){
+    window.scrollTo(0,0);
     this.setState({ isLoading: true });
     fetch(`http://www.theaudiodb.com/api/v1/json/1/searchalbum.php?s=${this.props.match.params.artistName}`)
     .then(response => {
@@ -30,11 +33,24 @@ class Albums extends Component {
     })
     .catch(error => this.setState({ error, isLoading: false }));
   }
+  componentDidUpdate() {
+    window.scrollTo(0,0);
+  }
+  __handleActivePage(event) {
+    window.scrollTo(0,0);
+    this.setState({
+      currentPage: Number(event.target.id)
+    });
+  }
   __renderAlbums(){
-    const { albumList } = this.state;
+    const { albumList, albumsPerPage, currentPage } = this.state;
+    const indexOfLastAlbum = currentPage * albumsPerPage;
+    const indexOfFirstAlbum = indexOfLastAlbum - albumsPerPage;
+    const currentPageAlbum = albumList.slice(indexOfFirstAlbum, indexOfLastAlbum);
     let renderAlbumBlock = [];
-    renderAlbumBlock = albumList !== null ?
-     albumList.map(item => {
+
+    renderAlbumBlock = currentPageAlbum !== null ?
+     currentPageAlbum.map(item => {
        return (
          <TrackRecord key={item.idAlbum} albumName={item.strAlbum} albumId={item.idAlbum} releaseYear={item.intYearReleased}/>
        );
@@ -43,7 +59,7 @@ class Albums extends Component {
     return renderAlbumBlock;
   }
   render() {
-    const { isLoading, error, artistdata, albumList } = this.state;
+    const { isLoading, error, artistdata, albumList, albumsPerPage, currentPage } = this.state;
     if(error){
       return <div className="Albums">
               <p>{error.message}</p>
@@ -52,9 +68,21 @@ class Albums extends Component {
 
     if(isLoading){
       return <div className="Albums">
-                <CircularProgress  color="secondary"/>
+                <CircularProgress color="secondary"/>
               </div>;
     }
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(albumList.length / albumsPerPage); i++) {
+      pageNumbers.push(i);
+    }
+    const renderPageNumbers = pageNumbers.map(number => {
+      return (
+        <li key={number} id={number}
+          onClick={this.__handleActivePage.bind(this)} className={ currentPage == number ? 'current' : ''}>
+          {number}
+        </li>
+      );
+    });
     return (
       <section className="Albums">
         <div className="Albums-artist">
@@ -63,15 +91,18 @@ class Albums extends Component {
           </div>
           <div className="Albums-artist__info">
             <h3>{artistdata.strArtist}</h3>
-            <p>Style: {artistdata.strStyle}</p>
-            <p>Genre: {artistdata.strGenre}</p>
-            <p>Country: {artistdata.strCountry}</p>
+            <p>Style: {artistdata.strStyle ? artistdata.strStyle : 'NA'}</p>
+            <p>Genre: {artistdata.strGenre ? artistdata.strGenre : 'NA'}</p>
+            <p>Country: {artistdata.strCountry ? artistdata.strCountry : 'NA' }</p>
           </div>
         </div>
         <div className="Albums-listing">
           <h2>{ albumList ? albumList.length > 0 ? `Albums` : '' : ''}</h2>
           {this.__renderAlbums()}
         </div>
+        <ul className="Albums-pages">
+          {renderPageNumbers}
+        </ul>
       </section>
     );
   }
