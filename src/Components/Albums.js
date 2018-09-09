@@ -27,7 +27,7 @@ class Albums extends Component {
   componentDidMount(){
     window.scrollTo(0,0);
     this.setState({ isLoading: true });
-    fetch(`http://www.theaudiodb.com/api/v1/json/1/searchalbum.php?s=${this.props.match.params.artistName}`)
+    fetch(`https://www.theaudiodb.com/api/v1/json/1/searchalbum.php?s=${this.props.match.params.artistName}`)
     .then(response => {
       if(response.ok){
         return response.json();

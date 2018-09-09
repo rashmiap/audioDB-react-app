@@ -35,7 +35,7 @@ class Artists extends Component {
   __fetchArtists(){
     const { userSearched } = this.state;
     this.setState({ isLoading: true });
-    fetch(`http://www.theaudiodb.com/api/v1/json/1/search.php?s=${userSearched}`)
+    fetch(`https://www.theaudiodb.com/api/v1/json/1/search.php?s=${userSearched}`)
     .then(response => {
       if(response.ok){
         return response.json();

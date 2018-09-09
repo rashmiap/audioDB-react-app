@@ -21,7 +21,7 @@ class TrackRecord extends Component {
       openDialog: true,
       isLoading: true,
     });
-    fetch(`http://www.theaudiodb.com/api/v1/json/1/track.php?m=${this.props.albumId}`)
+    fetch(`https://www.theaudiodb.com/api/v1/json/1/track.php?m=${this.props.albumId}`)
     .then(response => {
       if(response.ok){
         return response.json();
