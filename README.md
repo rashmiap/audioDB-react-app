@@ -17,7 +17,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Demo
 -
-The app can be seen in action [here]().
+The app can be seen in action [here](https://audiodb-artist-searchapp.surge.sh/).
 
 **Run Locally**
 -
