@@ -18,9 +18,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Demo
 -
 ![Preview Movie](src/Assets/Previews/artist.png)
+-
 ![Preview Shows](src/Assets/Previews/albums.png)
+-
 ![Preview Saved](src/Assets/Previews/pagination.png)
+-
 ![Preview Details](src/Assets/Previews/modal.png)
+-
 The app can be seen in action [here](https://audiodb-artist-searchapp.surge.sh/).
 
 **Run Locally**
