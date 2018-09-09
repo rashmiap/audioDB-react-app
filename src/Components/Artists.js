@@ -32,25 +32,31 @@ class Artists extends Component {
       currentPage: Number(event.target.id)
     });
   }
-  __fetchArtists(){
+  __fetchArtists(e){
     const { userSearched } = this.state;
-    this.setState({ isLoading: true });
-    fetch(`https://www.theaudiodb.com/api/v1/json/1/search.php?s=${userSearched}`)
-    .then(response => {
-      if(response.ok){
-        return response.json();
-      }
-      else{
-        throw new Error('Something went wrong ...');
-      }
-    }).then(data => {
-        this.setState({
-          userSearched: '',
-          artistsList: data.artists,
-          isLoading: false
-        })
-    })
-    .catch(error => this.setState({ error, isLoading: false, userSearched: ''}));
+    if(userSearched.trim().length > 0){
+      this.setState({ isLoading: true });
+      fetch(`https://www.theaudiodb.com/api/v1/json/1/search.php?s=${userSearched}`)
+      .then(response => {
+        if(response.ok){
+          return response.json();
+        }
+        else{
+          throw new Error('Something went wrong ...');
+        }
+      }).then(data => {
+          this.setState({
+            userSearched: '',
+            artistsList: data.artists,
+            isLoading: false
+          })
+      })
+      .catch(error => this.setState({ error, isLoading: false, userSearched: ''}));
+    }
+    else{
+      e.preventDefault();
+      return false;
+    }
   }
   __renderArtists(){
     const { artistsList, artistsPerPage, currentPage } = this.state;
