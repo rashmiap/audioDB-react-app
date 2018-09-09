@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TrackRecord from './TrackRecord';
+import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
+import backChev from '../Assets/back.svg';
+
+const backStyle = {
+  fontSize: '12px',
+  padding: '15px 0',
+  margin: '8px 0',
+  width: '100%'
+};
 
 class Albums extends Component {
   constructor(props){
@@ -52,7 +62,8 @@ class Albums extends Component {
     renderAlbumBlock = currentPageAlbum !== null ?
      currentPageAlbum.map(item => {
        return (
-         <TrackRecord key={item.idAlbum} albumName={item.strAlbum} albumId={item.idAlbum} releaseYear={item.intYearReleased}/>
+         <TrackRecord key={item.idAlbum} albumName={item.strAlbum} albumId={item.idAlbum} albumCover={item.strAlbumThumb}
+         releaseYear={item.intYearReleased}/>
        );
      })
      : <p>oops! No artist found</p>;
@@ -85,6 +96,9 @@ class Albums extends Component {
     });
     return (
       <section className="Albums">
+        <Button component={Link} to="/" color="secondary" style={backStyle} className="Albums-back" >
+          <img src={backChev} alt="back chevron" width="10px"/>Back to Search
+        </Button>
         <div className="Albums-artist">
           <div style={{backgroundImage: `url(${artistdata.strArtistThumb})`}} className="Albums-artist__thumbnail">
             &nbsp;

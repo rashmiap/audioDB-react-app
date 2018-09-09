@@ -78,7 +78,12 @@ class TrackRecord extends Component {
     return (
       <div className="Albums-results">
         <div className="Albums-results__header">
-          <img src={tone} alt="music tone" width="65px"/>
+          {
+            this.props.albumCover ?
+            <img src={this.props.albumCover} alt="music cover" /> :
+            <img src={tone} alt="music tone" />
+          }
+
         </div>
         <div className="Albums-results__info">
           <p className="name">{this.props.albumName}</p>
@@ -104,6 +109,7 @@ class TrackRecord extends Component {
 TrackRecord.propTypes = {
   albumName: PropTypes.string,
   albumId: PropTypes.string,
+  albumCover: PropTypes.string,
   releaseYear: PropTypes.string,
 };
 export default TrackRecord;

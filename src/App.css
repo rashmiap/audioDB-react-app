@@ -1,7 +1,10 @@
 /* body styling */
 body{
   min-height: 100vh;
-  background-color: #feeff4;
+  background-image: url(http://musicamente.com.br/wp-content/uploads/2017/07/MUSICBACKGROUND.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #616161;
 }
 /* artists component styling */
 .Artists{
@@ -78,12 +81,15 @@ body{
   text-align: right;
 }
 .Albums-results__header {
-    background-color: crimson;
     height: inherit;
     min-width: 50%;
     display: flex;
     align-items: CENTER;
     justify-content: center;
+}
+.Albums-results__header img{
+  max-width: 100%;
+  height: inherit;
 }
 .Albums-results__dialog >div:nth-of-type(2){
   width: 400px;
@@ -130,6 +136,9 @@ body{
 .Albums-pages li.current{
   background-color: crimson;
   color: white;
+}
+.Albums-back >span:first-of-type{
+  justify-content: flex-start;
 }
 /* media query for tablet and mobile screens */
 @media only screen and (max-width: 600px) {
