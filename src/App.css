@@ -137,6 +137,9 @@ body{
   background-color: crimson;
   color: white;
 }
+.Albums-back >span:first-of-type{
+  justify-content: flex-start;
+}
 /* media query for tablet and mobile screens */
 @media only screen and (max-width: 600px) {
   .Artists {
