@@ -140,6 +140,9 @@ body{
 .Albums-back >span:first-of-type{
   justify-content: flex-start;
 }
+.Not-found h3{
+  text-align: center;
+}
 /* media query for tablet and mobile screens */
 @media only screen and (max-width: 600px) {
   .Artists {
